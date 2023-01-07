@@ -1,0 +1,26 @@
+name: Venda
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - uses: actions/setup-node@v1
+          with:
+            node-version: 19
+        - run: npm run build
+        - run: npm run deploy
+
+    test:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - uses: actions/setup-node@v1
+          with:
+            node-version: 19
+        - run: npm ci
+        - run: npm run test
